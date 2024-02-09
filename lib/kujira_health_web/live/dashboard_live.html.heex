@@ -1,0 +1,10 @@
+<h2>USK</h2>
+<ul>
+  <%= for {address, summary} <- Map.to_list(@usk) do %>
+  <li>
+    <%= address %>
+    <br />
+    <%= if is_nil(summary) do %> ⏳ <% else %> ✅ <% end %>
+  </li>
+  <% end %>
+</ul>

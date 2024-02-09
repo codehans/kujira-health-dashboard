@@ -15,9 +15,10 @@ defmodule KujiraHealth.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: KujiraHealth.PubSub},
       # Start the Endpoint (http/https)
-      KujiraHealthWeb.Endpoint
+      KujiraHealthWeb.Endpoint,
       # Start a worker by calling: KujiraHealth.Worker.start_link(arg)
       # {KujiraHealth.Worker, arg}
+      KujiraHealth.Node
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

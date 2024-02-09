@@ -17,7 +17,7 @@ defmodule KujiraHealthWeb.Router do
   scope "/", KujiraHealthWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/", DashboardLive
   end
 
   # Other scopes may use custom stacks.
