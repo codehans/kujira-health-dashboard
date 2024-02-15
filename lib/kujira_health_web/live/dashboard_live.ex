@@ -8,17 +8,24 @@ defmodule KujiraHealthWeb.DashboardLive do
     {:ok,
      socket
      |> assign(:usk, %{})
+     |> assign(:oracle, %{})
      |> assign(:channel, Node.channel())}
   end
 
   def handle_info(:load, socket) do
     {:ok, usk} = Kujira.Usk.list_markets(socket.assigns.channel)
+    {:ok, rates} = Kujira.Oracle.load_prices(socket.assigns.channel)
 
     for market <- usk do
       send(self(), {:load, market})
     end
 
-    {:noreply, assign(socket, :usk, Enum.reduce(usk, %{}, &Map.put_new(&2, &1.address, nil)))}
+    usk = Enum.reduce(usk, %{}, &Map.put_new(&2, &1.address, nil))
+
+    {:noreply,
+     socket
+     |> assign(:usk, usk)
+     |> assign(:oracle, rates)}
   end
 
   def handle_info({:load, market}, socket) do

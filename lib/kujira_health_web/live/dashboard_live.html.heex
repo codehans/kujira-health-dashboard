@@ -1,3 +1,10 @@
+<h2>Oracle Prices</h2>
+<ul>
+  <%= for {denom, price} <- Map.to_list(@oracle) do %>
+  <li><%= denom %>: <%= price %></li>
+  <% end %>
+</ul>
+
 <h2>USK</h2>
 <ul>
   <%= for {address, summary} <- Map.to_list(@usk) do %>

@@ -48,7 +48,7 @@ defmodule KujiraHealth.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:kujira, path: "../kujira-ex"}
+      {:kujira,  "~> 0.1.14"}
     ]
   end
 
