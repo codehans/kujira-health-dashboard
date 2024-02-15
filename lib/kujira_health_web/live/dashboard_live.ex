@@ -4,6 +4,7 @@ defmodule KujiraHealthWeb.DashboardLive do
 
   def mount(_params, _session, socket) do
     send(self(), :load)
+    send(self(), :oracle)
     # Start by assigning an empty list of contracts
     {:ok,
      socket
@@ -14,7 +15,6 @@ defmodule KujiraHealthWeb.DashboardLive do
 
   def handle_info(:load, socket) do
     {:ok, usk} = Kujira.Usk.list_markets(socket.assigns.channel)
-    {:ok, rates} = Kujira.Oracle.load_prices(socket.assigns.channel)
 
     for market <- usk do
       send(self(), {:load, market})
@@ -22,10 +22,14 @@ defmodule KujiraHealthWeb.DashboardLive do
 
     usk = Enum.reduce(usk, %{}, &Map.put_new(&2, &1.address, nil))
 
-    {:noreply,
-     socket
-     |> assign(:usk, usk)
-     |> assign(:oracle, rates)}
+    {:noreply, assign(socket, :usk, usk)}
+  end
+
+  def handle_info(:oracle, socket) do
+    {:ok, rates} = Kujira.Oracle.load_prices(socket.assigns.channel)
+    Process.send_after(self(), :oracle, 500)
+
+    {:noreply, assign(socket, :oracle, rates)}
   end
 
   def handle_info({:load, market}, socket) do

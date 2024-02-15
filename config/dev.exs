@@ -74,4 +74,4 @@ config :phoenix, :stacktrace_depth, 20
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
 
-config :kujira_health, KujiraHealth.Node, host: "kujira-grpc.polkachu.com", port: 11890
+config :kujira_health, KujiraHealth.Node, host: "52.208.15.181", port: 9090
