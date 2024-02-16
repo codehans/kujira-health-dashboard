@@ -5,12 +5,15 @@ defmodule KujiraHealthWeb.DashboardLive do
   def mount(_params, _session, socket) do
     send(self(), :load)
     send(self(), :oracle)
+    channel = Node.channel()
+    {:ok, rates} = Kujira.Oracle.load_prices(channel)
+
     # Start by assigning an empty list of contracts
     {:ok,
      socket
      |> assign(:usk, %{})
-     |> assign(:oracle, %{})
-     |> assign(:channel, Node.channel())}
+     |> assign(:oracle, rates)
+     |> assign(:channel, channel)}
   end
 
   def handle_info(:load, socket) do
