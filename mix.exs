@@ -48,7 +48,7 @@ defmodule KujiraHealth.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:kujira, github: "Team-Kujira/kujira-ex"}
+      {:kujira, github: "Team-Kujira/kujira-ex", tag: "5d85530be914eb3e98b9d6bfbec119c58c303d00"}
     ]
   end
 
