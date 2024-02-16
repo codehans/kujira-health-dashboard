@@ -1,17 +1,10 @@
-<h2>Oracle Prices</h2>
+<h2>Live Oracle Prices</h2>
+<p>
+  A real-time feed of on-chain Oracle prices from the Kujira devnet. Built with
+  Cosmos SDK 50 Vote Extensions.
+</p>
 <ul>
   <%= for {denom, price} <- Map.to_list(@oracle) do %>
   <li><%= denom %>: <%= price %></li>
-  <% end %>
-</ul>
-
-<h2>USK</h2>
-<ul>
-  <%= for {address, summary} <- Map.to_list(@usk) do %>
-  <li>
-    <%= address %>
-    <br />
-    <%= if is_nil(summary) do %> ⏳ <% else %> ✅ <% end %>
-  </li>
   <% end %>
 </ul>

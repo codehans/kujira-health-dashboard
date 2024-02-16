@@ -10,7 +10,7 @@ defmodule KujiraHealth.Node do
 
     {:ok, channel} =
       GRPC.Stub.connect(config[:host], config[:port],
-        interceptors: [{GRPC.Logger.Client, level: :debug}]
+        interceptors: [{GRPC.Logger.Client, level: :info}]
       )
 
     Agent.start_link(fn -> channel end, name: __MODULE__)

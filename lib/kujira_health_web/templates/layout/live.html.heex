@@ -1,4 +1,5 @@
 <main class="container">
+  <%= if live_flash(@flash, :info) do %>
   <p
     class="alert alert-info"
     role="alert"
@@ -7,7 +8,7 @@
   >
     <%= live_flash(@flash, :info) %>
   </p>
-
+  <% end %> <%= if live_flash(@flash, :error) do %>
   <p
     class="alert alert-danger"
     role="alert"
@@ -16,6 +17,5 @@
   >
     <%= live_flash(@flash, :error) %>
   </p>
-
-  <%= @inner_content %>
+  <% end %> <%= @inner_content %>
 </main>
